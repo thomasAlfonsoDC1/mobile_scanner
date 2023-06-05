@@ -132,7 +132,7 @@ class MobileScanner(
      * Start barcode scanning by initializing the camera and barcode scanner.
      */
     
-    Log.d("TEST HEREEEEEEEE)
+    
     @ExperimentalGetImage
     fun start(
         barcodeScannerOptions: BarcodeScannerOptions?,
@@ -146,7 +146,7 @@ class MobileScanner(
         detectionTimeout: Long
     ) {
 
-        Log.d("TEST HEREEEEEEEE2)
+        Log.d("TEST HEREEEEEEEE2")
         this.detectionSpeed = detectionSpeed
         this.detectionTimeout = detectionTimeout
         this.returnImage = returnImage
