@@ -18,6 +18,7 @@ import dev.steenbakker.mobile_scanner.objects.DetectionSpeed
 import dev.steenbakker.mobile_scanner.objects.MobileScannerStartParameters
 import io.flutter.view.TextureRegistry
 import kotlin.math.roundToInt
+import android.util.Log
 
 class MobileScanner(
     private val activity: Activity,
