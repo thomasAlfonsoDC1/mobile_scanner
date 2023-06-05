@@ -146,7 +146,7 @@ class MobileScanner(
         detectionTimeout: Long
     ) {
 
-        Log.d("MYNATIVE", "TEST HEREEEEEEEE2")
+        // Log.d("MYNATIVE", "TEST HEREEEEEEEE2")
         this.detectionSpeed = detectionSpeed
         this.detectionTimeout = detectionTimeout
         this.returnImage = returnImage
