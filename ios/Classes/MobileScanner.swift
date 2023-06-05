@@ -123,7 +123,7 @@ public class MobileScanner: NSObject, AVCaptureVideoDataOutputSampleBufferDelega
         if (device != nil) {
             throw MobileScannerError.alreadyStarted
         }
-
+        print("test start HERFEEEEEEEEE.")
         scanner = barcodeScannerOptions != nil ? BarcodeScanner.barcodeScanner(options: barcodeScannerOptions!) : BarcodeScanner.barcodeScanner()
         captureSession = AVCaptureSession()
         textureId = registry?.register(self)
