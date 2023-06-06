@@ -200,18 +200,46 @@ class MobileScanner(
             val previewBuilder = Preview.Builder()
             preview = previewBuilder.build().apply { setSurfaceProvider(surfaceProvider) }
 
-            // Build the analyzer to be passed on to MLKit
-            val analysisBuilder = ImageAnalysis.Builder()
-                .setBackpressureStrategy(ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST)
+             // Build the analyzer to be passed on to MLKit
+        val analysisBuilder = ImageAnalysis.Builder()
+            .setBackpressureStrategy(ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST)
 //                analysisBuilder.setTargetResolution(Size(1440, 1920))
-            val analysis = analysisBuilder.build().apply { setAnalyzer(executor, captureOutput) }
+        val analysis = analysisBuilder.build().apply {
+            setAnalyzer(executor) { imageProxy ->
+                val mediaImage = imageProxy.image
+                if (mediaImage != null) {
+                    val rotationDegrees = imageProxy.imageInfo.rotationDegrees
 
-            camera = cameraProvider!!.bindToLifecycle(
-                activity as LifecycleOwner,
-                cameraPosition,
-                preview,
-                analysis
-            )
+                    // Convert MediaImage to FirebaseVisionImage
+                    val visionImage = FirebaseVisionImage.fromMediaImage(mediaImage, rotationDegrees)
+
+                    // Perform face detection
+                    faceDetector.process(visionImage)
+                        .addOnSuccessListener { faces ->
+                            // Blur the detected faces in the image
+                            val blurredImage = blurFaces(mediaImage, faces)
+
+                            // Use the blurredImage as needed
+
+                            // Release the image resources
+                            imageProxy.close()
+                        }
+                        .addOnFailureListener { exception ->
+                            // Handle face detection error
+                            imageProxy.close()
+                        }
+                } else {
+                    imageProxy.close()
+                }
+            }
+        }
+
+        camera = cameraProvider!!.bindToLifecycle(
+            activity as LifecycleOwner,
+            cameraPosition,
+            preview,
+            analysis
+        )
 
             // Register the torch listener
             camera!!.cameraInfo.torchState.observe(activity) { state ->
