@@ -19,6 +19,8 @@ import dev.steenbakker.mobile_scanner.objects.MobileScannerStartParameters
 import io.flutter.view.TextureRegistry
 import kotlin.math.roundToInt
 import android.util.Log
+import com.google.mlkit.vision.face.FaceDetection
+import com.google.mlkit.vision.face.FaceDetectorOptions
 
 class MobileScanner(
     private val activity: Activity,
@@ -147,6 +149,16 @@ class MobileScanner(
     ) {
 
         Log.d("MYNATIVE", "TEST HEREEEEEEEE2")
+
+         // Create face detection options for ML Kit
+        val faceDetectorOptions = FaceDetectorOptions.Builder()
+            .setPerformanceMode(FaceDetectorOptions.PERFORMANCE_MODE_FAST)
+            .build()
+
+        // Create a face detector using ML Kit
+         val faceDetector = FaceDetection.getClient(faceDetectorOptions)
+
+
         this.detectionSpeed = detectionSpeed
         this.detectionTimeout = detectionTimeout
         this.returnImage = returnImage
