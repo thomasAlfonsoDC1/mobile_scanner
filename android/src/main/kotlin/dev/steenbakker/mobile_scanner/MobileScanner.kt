@@ -59,54 +59,54 @@ class MobileScanner(
             scannerTimeout = true
         }
 
-        scanner.process(inputImage)
-            .addOnSuccessListener { barcodes ->
-                if (detectionSpeed == DetectionSpeed.NO_DUPLICATES) {
-                    val newScannedBarcodes = barcodes.map { barcode -> barcode.rawValue }
-                    if (newScannedBarcodes == lastScanned) {
-                        // New scanned is duplicate, returning
-                        return@addOnSuccessListener
-                    }
-                    if (newScannedBarcodes.isNotEmpty()) lastScanned = newScannedBarcodes
-                }
+        // scanner.process(inputImage)
+        //     .addOnSuccessListener { barcodes ->
+        //         if (detectionSpeed == DetectionSpeed.NO_DUPLICATES) {
+        //             val newScannedBarcodes = barcodes.map { barcode -> barcode.rawValue }
+        //             if (newScannedBarcodes == lastScanned) {
+        //                 // New scanned is duplicate, returning
+        //                 return@addOnSuccessListener
+        //             }
+        //             if (newScannedBarcodes.isNotEmpty()) lastScanned = newScannedBarcodes
+        //         }
 
-                val barcodeMap: MutableList<Map<String, Any?>> = mutableListOf()
+        //         val barcodeMap: MutableList<Map<String, Any?>> = mutableListOf()
 
-                for (barcode in barcodes) {
-                    if (scanWindow != null) {
-                        val match = isBarcodeInScanWindow(scanWindow!!, barcode, imageProxy)
-                        if (!match) {
-                            continue
-                        } else {
-                            barcodeMap.add(barcode.data)
-                        }
-                    } else {
-                        barcodeMap.add(barcode.data)
-                    }
-                }
+        //         for (barcode in barcodes) {
+        //             if (scanWindow != null) {
+        //                 val match = isBarcodeInScanWindow(scanWindow!!, barcode, imageProxy)
+        //                 if (!match) {
+        //                     continue
+        //                 } else {
+        //                     barcodeMap.add(barcode.data)
+        //                 }
+        //             } else {
+        //                 barcodeMap.add(barcode.data)
+        //             }
+        //         }
 
-                if (barcodeMap.isNotEmpty()) {
-                    mobileScannerCallback(
-                        barcodeMap,
-                        if (returnImage) mediaImage.toByteArray() else null,
-                        if (returnImage) mediaImage.width else null,
-                        if (returnImage) mediaImage.height else null
-                    )
-                }
-            }
-            .addOnFailureListener { e ->
-                mobileScannerErrorCallback(
-                    e.localizedMessage ?: e.toString()
-                )
-            }
-            .addOnCompleteListener { imageProxy.close() }
+        //         if (barcodeMap.isNotEmpty()) {
+        //             mobileScannerCallback(
+        //                 barcodeMap,
+        //                 if (returnImage) mediaImage.toByteArray() else null,
+        //                 if (returnImage) mediaImage.width else null,
+        //                 if (returnImage) mediaImage.height else null
+        //             )
+        //         }
+        //     }
+        //     .addOnFailureListener { e ->
+        //         mobileScannerErrorCallback(
+        //             e.localizedMessage ?: e.toString()
+        //         )
+        //     }
+        //     .addOnCompleteListener { imageProxy.close() }
 
-        if (detectionSpeed == DetectionSpeed.NORMAL) {
-            // Set timer and continue
-            Handler(Looper.getMainLooper()).postDelayed({
-                scannerTimeout = false
-            }, detectionTimeout)
-        }
+        // if (detectionSpeed == DetectionSpeed.NORMAL) {
+        //     // Set timer and continue
+        //     Handler(Looper.getMainLooper()).postDelayed({
+        //         scannerTimeout = false
+        //     }, detectionTimeout)
+        // }
     }
 
     // scales the scanWindow to the provided inputImage and checks if that scaled
