@@ -217,7 +217,7 @@ class MobileScanner(
                     faceDetector.process(visionImage)
                         .addOnSuccessListener { faces ->
                             // Blur the detected faces in the image
-                            val blurredImage = blurFaces(mediaImage, faces)
+                            // val blurredImage = blurFaces(mediaImage, faces)
 
                             // Use the blurredImage as needed
 
