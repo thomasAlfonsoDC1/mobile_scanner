@@ -148,7 +148,7 @@ class MobileScanner(
         detectionTimeout: Long
     ) {
 
-        Log.d("MYNATIVE", "TEST HEREEEEEEEE2")
+        
 
          // Create face detection options for ML Kit
         val faceDetectorOptions = FaceDetectorOptions.Builder()
@@ -218,7 +218,7 @@ class MobileScanner(
                         .addOnSuccessListener { faces ->
                             // Blur the detected faces in the image
                             // val blurredImage = blurFaces(mediaImage, faces)
-
+                            Log.d("FACERECO", "FACERECO HEREEEEEEEE2")
                             // Use the blurredImage as needed
 
                             // Release the image resources
