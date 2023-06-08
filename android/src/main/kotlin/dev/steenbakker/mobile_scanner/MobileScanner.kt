@@ -218,7 +218,10 @@ class MobileScanner(
                         .addOnSuccessListener { faces ->
                             // Blur the detected faces in the image
                             // val blurredImage = blurFaces(mediaImage, faces)
-                            Log.d("FACERECO", "FACERECO HEREEEEEEEE2")
+                            
+                            for (face in faces) {
+                                Log.d("FACE_RECO", "FACERECO HEREEEEEEEE3")
+                            }
                             // Use the blurredImage as needed
 
                             // Release the image resources
