@@ -211,7 +211,7 @@ class MobileScanner(
                     val rotationDegrees = imageProxy.imageInfo.rotationDegrees
 
                     // Convert MediaImage to FirebaseVisionImage
-                    val visionImage = FirebaseVisionImage.fromMediaImage(mediaImage, rotationDegrees)
+                    val visionImage = InputImage.fromMediaImage(mediaImage, rotationDegrees)
 
                     // Perform face detection
                     faceDetector.process(visionImage)
