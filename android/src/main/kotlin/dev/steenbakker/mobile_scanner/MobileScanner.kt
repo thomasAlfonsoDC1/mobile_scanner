@@ -1,5 +1,7 @@
 package dev.steenbakker.mobile_scanner
-import android.graphics.*
+import android.graphics.Bitmap
+import android.graphics.Canvas
+import android.graphics.Paint
 import android.media.Image
 import android.app.Activity
 import android.graphics.Rect
@@ -170,12 +172,10 @@ class MobileScanner(
          val faceDetector = FaceDetection.getClient(faceDetectorOptions)
             
         ///// Added
-        val paint: Paint().apply {
-            color = Color.TRANSPARENT
-            style = Paint.Style.FILL
-            xfermode = PorterDuffXfermode(PorterDuff.Mode.DST_IN)
-        }
-
+        Paint paint = new Paint();
+        paint.setColor(Color.BLACK);
+        paint.setStrokeWidth(3);
+        
         this.detectionSpeed = detectionSpeed
         this.detectionTimeout = detectionTimeout
         this.returnImage = returnImage
