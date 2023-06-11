@@ -374,7 +374,7 @@ class MobileScanner(
         camera!!.cameraControl.setZoomRatio(1f)
     }
 
-    private fun createBitmapFromImageProxy(imageProxy: ImageProxy): Bitmap? {
+    private fun createBitmapFromImageProxy(image: Image): Bitmap? {
     val image = imageProxy.image ?: return null
 
     try {
