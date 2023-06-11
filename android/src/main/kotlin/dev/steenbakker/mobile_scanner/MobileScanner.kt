@@ -2,7 +2,8 @@ package dev.steenbakker.mobile_scanner
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.Paint
-import android.graphics.Color;
+import android.graphics.Color
+import android.graphics.BitmapFactory
 import android.media.Image
 import android.app.Activity
 import android.graphics.Rect
