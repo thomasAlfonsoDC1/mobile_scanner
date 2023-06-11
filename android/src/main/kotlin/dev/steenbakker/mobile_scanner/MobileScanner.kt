@@ -229,27 +229,27 @@ class MobileScanner(
                                 color = Color.BLACK
                                 strokeWidth = 3f
                             }
-                            val imageBitmap = createBitmapFromImageProxy(mediaImage)
-                            if(imageBitmap != null){
-                                val canvas = Canvas(imageBitmap)
-                                // Clear the canvas
-                                canvas.drawColor(0, android.graphics.PorterDuff.Mode.CLEAR)
+                            // val imageBitmap = createBitmapFromImageProxy(mediaImage)
+                            // if(imageBitmap != null){
+                                // val canvas = Canvas(imageBitmap)
+                                // // Clear the canvas
+                                // canvas.drawColor(0, android.graphics.PorterDuff.Mode.CLEAR)
 
-                                // Draw the original image on the canvas
-                                canvas.drawBitmap(imageBitmap, 0f, 0f, null)
+                                // // Draw the original image on the canvas
+                                // canvas.drawBitmap(imageBitmap, 0f, 0f, null)
 
                                 // Blur the detected faces in the image
                                 for (face in faces) {
                                     val faceBounds = face.boundingBox
                                     Log.d("FACE_RECO", "FACERECO HERE 2")
                                     if (faceBounds != null) {
-                                        canvas.drawRect(faceBounds, paint)
+                                        // canvas.drawRect(faceBounds, paint)
                                         Log.d("FACE_RECO", "FACERECO HERE 3")
                                     }
                                 }
-                            }else{
-                                Log.d("imageBitmapAux", "null")
-                            }
+                            // }else{
+                            //     Log.d("imageBitmapAux", "null")
+                            // }
                             
 
                             // Release the image resources
