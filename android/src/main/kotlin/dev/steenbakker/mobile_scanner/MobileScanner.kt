@@ -47,6 +47,16 @@ class MobileScanner(
     private var detectionTimeout: Long = 250
     private var returnImage = false
 
+ 
+
+    private fun initializeBlurPaint() {
+        paint = Paint().apply {
+            color = Color.TRANSPARENT
+            style = Paint.Style.FILL
+            xfermode = PorterDuffXfermode(PorterDuff.Mode.DST_IN)
+        }
+    }
+
     /**
      * callback for the camera. Every frame is passed through this function.
      */
@@ -160,7 +170,11 @@ class MobileScanner(
 
         // Create a face detector using ML Kit
          val faceDetector = FaceDetection.getClient(faceDetectorOptions)
-
+            
+        ///// Added
+        val blurredBitmap: Bitmap
+        val canvas: Canvas
+        val var paint: Paint
 
         this.detectionSpeed = detectionSpeed
         this.detectionTimeout = detectionTimeout
