@@ -387,8 +387,7 @@ class MobileScanner(
         Log.d("errorBuffer", "ERROR")
         ex.printStackTrace()
     } finally {
-        image.close()
-        imageProxy.close()
+        
     }
 
     return null
