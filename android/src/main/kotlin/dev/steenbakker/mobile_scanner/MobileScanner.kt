@@ -230,22 +230,27 @@ class MobileScanner(
                                 strokeWidth = 3f
                             }
                             val imageBitmap = createBitmapFromImageProxy(mediaImage)
-                            val canvas = Canvas(imageBitmap)
-                            // Clear the canvas
-                            canvas.drawColor(0, android.graphics.PorterDuff.Mode.CLEAR)
+                            if(imageBitmap != null){
+                                val canvas = Canvas(imageBitmap)
+                                // Clear the canvas
+                                canvas.drawColor(0, android.graphics.PorterDuff.Mode.CLEAR)
 
-                            // Draw the original image on the canvas
-                            canvas.drawBitmap(imageBitmap, 0f, 0f, null)
+                                // Draw the original image on the canvas
+                                canvas.drawBitmap(imageBitmap, 0f, 0f, null)
 
-                            // Blur the detected faces in the image
-                            for (face in faces) {
-                                val faceBounds = face.boundingBox
-                                Log.d("FACE_RECO", "FACERECO HERE 2")
-                                if (faceBounds != null) {
-                                    canvas.drawRect(faceBounds, paint)
-                                    Log.d("FACE_RECO", "FACERECO HERE 3")
+                                // Blur the detected faces in the image
+                                for (face in faces) {
+                                    val faceBounds = face.boundingBox
+                                    Log.d("FACE_RECO", "FACERECO HERE 2")
+                                    if (faceBounds != null) {
+                                        canvas.drawRect(faceBounds, paint)
+                                        Log.d("FACE_RECO", "FACERECO HERE 3")
+                                    }
                                 }
+                            }else{
+                                Log.d("imageBitmapAux", "null")
                             }
+                            
 
                             // Release the image resources
                             imageProxy.close()
@@ -369,11 +374,17 @@ class MobileScanner(
         camera!!.cameraControl.setZoomRatio(1f)
     }
 
-    private fun createBitmapFromImageProxy(image: Image): Bitmap {
+    private fun createBitmapFromImageProxy(image: Image): Bitmap? {
         val buffer = image.planes[0].buffer
         val bytes = ByteArray(buffer.capacity())
         buffer.get(bytes)
-        return BitmapFactory.decodeByteArray(bytes, 0, bytes.size)
+        if (bytes != null) {
+            return BitmapFactory.decodeByteArray(bytes, 0, bytes.size)
+        } else {
+            return null
+            // Handle the case when bytes is null
+        }
+        
     }
 
 
