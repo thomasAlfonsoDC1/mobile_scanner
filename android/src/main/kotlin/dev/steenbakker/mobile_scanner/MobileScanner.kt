@@ -375,7 +375,6 @@ class MobileScanner(
     }
 
     private fun createBitmapFromImageProxy(image: Image): Bitmap? {
-    val image = imageProxy.image ?: return null
 
     try {
         val buffer = image.planes[0].buffer
