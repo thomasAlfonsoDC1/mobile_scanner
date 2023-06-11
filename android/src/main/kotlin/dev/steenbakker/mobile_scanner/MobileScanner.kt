@@ -1,5 +1,8 @@
 package dev.steenbakker.mobile_scanner
-
+import android.graphics.Bitmap
+import android.graphics.Canvas
+import android.graphics.Paint
+import android.media.Image
 import android.app.Activity
 import android.graphics.Rect
 import android.net.Uri
@@ -127,7 +130,7 @@ class MobileScanner(
         val bottom = (scanWindow[3] * imageHeight).roundToInt()
 
         val scaledScanWindow = Rect(left, top, right, bottom)
-        return false
+        return scaledScanWindow.contains(barcodeBoundingBox)
     }
 
     /**
@@ -219,10 +222,23 @@ class MobileScanner(
                             // Blur the detected faces in the image
                             // val blurredImage = blurFaces(mediaImage, faces)
                             
+                            val imageBitmap = createBitmapFromImageProxy(mediaImage)
+
+                            // Clear the canvas
+                            canvas.drawColor(0, android.graphics.PorterDuff.Mode.CLEAR)
+
+                            // Draw the original image on the canvas
+                            canvas.drawBitmap(imageBitmap, 0f, 0f, null)
+
+                            // Blur the detected faces in the image
                             for (face in faces) {
-                                Log.d("FACE_RECO", "FACERECO HEREEEEEEEE3")
+                                val faceBounds = face.boundingBox
+                                Log.d("FACE_RECO", "FACERECO HERE 2")
+                                if (faceBounds != null) {
+                                    canvas.drawRect(faceBounds, paint)
+                                    Log.d("FACE_RECO", "FACERECO HERE 3")
+                                }
                             }
-                            // Use the blurredImage as needed
 
                             // Release the image resources
                             imageProxy.close()
