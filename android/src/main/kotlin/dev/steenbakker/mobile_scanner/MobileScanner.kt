@@ -2,6 +2,7 @@ package dev.steenbakker.mobile_scanner
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.Paint
+import android.graphics.Color;
 import android.media.Image
 import android.app.Activity
 import android.graphics.Rect
@@ -223,9 +224,10 @@ class MobileScanner(
                             // Blur the detected faces in the image
                             // val blurredImage = blurFaces(mediaImage, faces)
                              ///// Added
-                            Paint paint = new Paint();
-                            paint.setColor(Color.BLACK);
-                            paint.setStrokeWidth(3);
+                            val paint = Paint().apply {
+                                color = Color.BLACK
+                                strokeWidth = 3f
+                            }
                             val imageBitmap = createBitmapFromImageProxy(mediaImage)
                             val canvas = Canvas(imageBitmap)
                             // Clear the canvas
