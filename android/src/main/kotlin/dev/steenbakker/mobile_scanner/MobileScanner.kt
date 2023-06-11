@@ -317,6 +317,7 @@ class MobileScanner(
         cameraProvider = null
     }
 
+
     /**
      * Toggles the flash light on or off.
      */
@@ -366,5 +367,13 @@ class MobileScanner(
         if (camera == null) throw ZoomWhenStopped()
         camera!!.cameraControl.setZoomRatio(1f)
     }
+
+    private fun createBitmapFromImageProxy(image: Image): Bitmap {
+        val buffer = image.planes[0].buffer
+        val bytes = ByteArray(buffer.capacity())
+        buffer.get(bytes)
+        return BitmapFactory.decodeByteArray(bytes, 0, bytes.size)
+    }
+
 
 }
